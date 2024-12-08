@@ -4,7 +4,7 @@ module.exports = {
     title: "Napoleon",
     rating: "R",
     language: "English",
-    length: 158,
+    length: '158',
     description:
       "An epic that details the chequered rise and fall of French Emperor Napoleon Bonaparte and his relentless journey to power through the prism of his addictive, volatile relationship with his wife, Josephine.",
     director: "Ridley Scott",

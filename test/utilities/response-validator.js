@@ -6,6 +6,15 @@ class ApiResponseValidator {
     expect(response.data).toBeDefined();
   }
 
+  isArray(responseData) {
+    expect(Array.isArray(responseData)).toBe(true);
+  }
+
+  async validateArrayResponse(response) {
+    const data = response.data.content || response.data;
+    await this.isArray(data); 
+  }
+
   validateFields(response, expectedFields) {
     expectedFields.forEach(field => {
       expect(response.data).toBeDefined(field);

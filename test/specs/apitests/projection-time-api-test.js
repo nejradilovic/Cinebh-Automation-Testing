@@ -6,8 +6,7 @@ describe("API Tests for Projection Times", () => {
     const response = await ProjectionTimesEndpoint.getProjectionTimes();
 
     ApiResponseValidator.validateStatus(response, 200);
-
-    expect(Array.isArray(response.data)).toBe(true);
+    ApiResponseValidator.validateArrayResponse(response);
     ApiResponseValidator.validateProjectionFields(response);
   });
 });

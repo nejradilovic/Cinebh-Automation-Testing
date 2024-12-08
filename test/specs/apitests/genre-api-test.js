@@ -6,8 +6,7 @@ describe("API Tests for Genres", () => {
     const response = await GenresEndpoint.getAllGenres();
 
     ApiResponseValidator.validateStatus(response, 200);
-    
-    expect(Array.isArray(response.data)).toBe(true);
+    ApiResponseValidator.validateArrayResponse(response);
     ApiResponseValidator.validateGenreFields(response);
   });
 });

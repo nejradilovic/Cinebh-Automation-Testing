@@ -6,8 +6,7 @@ describe("API Tests for Venues", () => {
     const response = await VenuesEndpoint.getAllVenues();
 
     ApiResponseValidator.validateStatus(response, 200);
-
-    expect(Array.isArray(response.data)).toBe(true);
+    ApiResponseValidator.validateArrayResponse(response);
     ApiResponseValidator.validateVenueFields(response);
   });
 
@@ -15,9 +14,8 @@ describe("API Tests for Venues", () => {
     const response = await VenuesEndpoint.getPaginatedVenues();
 
     ApiResponseValidator.validateStatus(response, 200);
-
-    expect(Array.isArray(response.data.content)).toBe(true);
-
+    ApiResponseValidator.validateArrayResponse(response);
+    
     if (response.data.content.length > 0) {
       ApiResponseValidator.validateVenueFields(response);
     }
