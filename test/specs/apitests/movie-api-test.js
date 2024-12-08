@@ -1,11 +1,11 @@
-const moviesEndpoint = require("../../api/movies-endpoint");
+const MoviesEndpoint = require("../../api/movies-endpoint");
 const ApiResponseValidator = require("../../utilities/response-validator");
 const testData = require("../../data/test-data");
 const fieldDefinitions = require("../../data/field-definitions");
 
 describe("API Tests for Movies", () => {
   it("should return a paginated list of movies when GET /api/movies/ is called", async () => {
-    const response = await moviesEndpoint.getPaginatedMovies();
+    const response = await MoviesEndpoint.getPaginatedMovies();
 
     ApiResponseValidator.validateStatus(response, 200);
 
@@ -20,7 +20,7 @@ describe("API Tests for Movies", () => {
   it("should return movie details when GET /api/movies/{movieId} is called", async () => {
     const movieId = testData.movie.id;
     const movieTitle = testData.movie.title;  
-    const response = await moviesEndpoint.getMovieById(movieId);
+    const response = await MoviesEndpoint.getMovieById(movieId);
 
     ApiResponseValidator.validateStatus(response, 200);
 
@@ -33,7 +33,7 @@ describe("API Tests for Movies", () => {
 
   it("should return similar movies when GET /api/movies/{movieId}/similar is called", async () => {
     const movieId = testData.movie.id;
-    const response = await moviesEndpoint.getSimilarMovies(movieId);
+    const response = await MoviesEndpoint.getSimilarMovies(movieId);
 
     ApiResponseValidator.validateStatus(response, 200);
     
@@ -46,7 +46,7 @@ describe("API Tests for Movies", () => {
   });
 
   it("should return featured movies when GET /api/movies/featured is called", async () => {
-    const response = await moviesEndpoint.getFeaturedMovies();
+    const response = await MoviesEndpoint.getFeaturedMovies();
 
     ApiResponseValidator.validateStatus(response, 200);
 
@@ -59,7 +59,7 @@ describe("API Tests for Movies", () => {
   });
 
   it("should return upcoming movies when GET /api/movies/upcoming is called", async () => {
-    const response = await moviesEndpoint.getUpcomingMovies();
+    const response = await MoviesEndpoint.getUpcomingMovies();
   
     ApiResponseValidator.validateStatus(response, 200);
   
@@ -77,7 +77,7 @@ describe("API Tests for Movies", () => {
   });
   
   it("should return currently showing movies when GET /api/movies/currently-showing is called", async () => {
-    const response = await moviesEndpoint.getCurrentlyShowingMovies();
+    const response = await MoviesEndpoint.getCurrentlyShowingMovies();
      
     ApiResponseValidator.validateStatus(response, 200);
 
@@ -91,7 +91,7 @@ describe("API Tests for Movies", () => {
 
   it("should return currently showing movies with 'Action' genre when GET /api/movies/currently-showing is called", async () => {
     const filters = { genres: 'Action'}; 
-    const response = await moviesEndpoint.getCurrentlyShowingMovies(0, 4, filters);
+    const response = await MoviesEndpoint.getCurrentlyShowingMovies(0, 4, filters);
   
     ApiResponseValidator.validateStatus(response, 200);
   
@@ -113,5 +113,4 @@ describe("API Tests for Movies", () => {
     }
     ApiResponseValidator.validatePaginatedResponse(response);
   });
-  
 });
