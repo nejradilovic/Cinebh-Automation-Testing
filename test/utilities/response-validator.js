@@ -12,21 +12,29 @@ class ApiResponseValidator {
 
   validateArrayResponse(response) {
     const data = response.data.content || response.data;
-    this.isArray(data); 
+    this.isArray(data);
+  }
+
+  validateEquality(actual, expected) {
+    expect(actual).toEqual(expected);
   }
 
   validateFields(response, expectedFields) {
-    expectedFields.forEach(field => {
+    expectedFields.forEach((field) => {
       expect(response.data).toBeDefined(field);
     });
   }
 
   validateEntityFields(response, entityType) {
     const fields = fieldDefinitions[`${entityType}Fields`];
-    if (Array.isArray(response.data.content)) {
-      response.data.content.forEach(entity => {
+    const content = response.data.content || response.data;
+
+    if (Array.isArray(content) && content.length > 0) {
+      content.forEach((entity) => {
         this.validateFields({ data: entity }, fields);
       });
+    } else if (content.length === 0) {
+      expect(content).toEqual([]);
     } else {
       this.validateFields(response, fields);
     }

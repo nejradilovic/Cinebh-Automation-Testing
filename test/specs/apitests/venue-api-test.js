@@ -15,10 +15,7 @@ describe("API Tests for Venues", () => {
 
     ApiResponseValidator.validateStatus(response, 200);
     ApiResponseValidator.validateArrayResponse(response);
-    
-    if (response.data.content.length > 0) {
-      ApiResponseValidator.validateEntityFields(response, 'venue');
-    }
+    ApiResponseValidator.validateEntityFields(response, 'venue');
     ApiResponseValidator.validatePaginatedResponse(response);
   });
 });

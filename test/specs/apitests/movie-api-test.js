@@ -8,35 +8,27 @@ describe("API Tests for Movies", () => {
 
     ApiResponseValidator.validateStatus(response, 200);
     ApiResponseValidator.validateArrayResponse(response);
-    
-    if (response.data.content.length > 0) {
-      ApiResponseValidator.validateEntityFields(response, 'movie');
-    }
+    ApiResponseValidator.validateEntityFields(response, 'movie');
     ApiResponseValidator.validatePaginatedResponse(response);
   });
 
   it("should return movie details when GET /api/movies/{movieId} is called", async () => {
-    const { movie: expectedMovie } = testData;
-    const response = await MoviesEndpoint.getMovieById(expectedMovie.id);
+    const response = await MoviesEndpoint.getMovieById(testData.movie.id);
 
     ApiResponseValidator.validateStatus(response, 200);
-    console.log(`GET /api/movies/${expectedMovie.id}: Received movie details of ${response.data.title}`);
+    ApiResponseValidator.validateEquality(response.data,testData.movie);
 
-    expect(response.data).toEqual(expectedMovie);
+    console.log(`GET /api/movies/${testData.movie.id}: Received movie details of ${response.data.title}`);
   });
 
   it("should return similar movies when GET /api/movies/{movieId}/similar is called", async () => {
-    const movieId = testData.movie.id;
-    const response = await MoviesEndpoint.getSimilarMovies(movieId);
+    const response = await MoviesEndpoint.getSimilarMovies(testData.movie.id);
 
     ApiResponseValidator.validateStatus(response, 200);
     ApiResponseValidator.validateArrayResponse(response);
-    
-    console.log(`GET /api/movies/${movieId}/similar: Received ${response.data.content.length} similar movies`);
+    ApiResponseValidator.validateEntityFields(response, 'movie');
 
-    if (response.data.content.length > 0) {
-      ApiResponseValidator.validateEntityFields(response, 'movie');
-    }
+    console.log(`GET /api/movies/${testData.movie.id}/similar: Received ${response.data.content.length} similar movies`);
   });
 
   it("should return featured movies when GET /api/movies/featured is called", async () => {
@@ -44,12 +36,9 @@ describe("API Tests for Movies", () => {
 
     ApiResponseValidator.validateStatus(response, 200);
     ApiResponseValidator.validateArrayResponse(response);
+    ApiResponseValidator.validateEntityFields(response, 'movie');
     
     console.log(`GET /api/movies/featured: Received ${response.data.length} featured movies`);
-    
-    if(response.data.length > 0) {
-      ApiResponseValidator.validateEntityFields(response, 'movie');
-    }
   });
 
   it("should return upcoming movies when GET /api/movies/upcoming is called", async () => {
@@ -59,10 +48,7 @@ describe("API Tests for Movies", () => {
   
     if (response.data.content.length > 0) {
       console.log(`GET /api/movies/upcoming: Received ${response.data.content.length} upcoming movies`);
-  
-      if (response.data.content.length > 0) {
-        ApiResponseValidator.validateEntityFields(response, 'movie');
-      }
+      ApiResponseValidator.validateEntityFields(response, 'movie');
     }
     else {
       console.log("GET /api/movies/upcoming: No upcoming movies found");
@@ -75,12 +61,9 @@ describe("API Tests for Movies", () => {
      
     ApiResponseValidator.validateStatus(response, 200);
     ApiResponseValidator.validateArrayResponse(response);
+    ApiResponseValidator.validateEntityFields(response, 'movie');
 
     console.log(`GET /api/movies/currently-showing: Received ${response.data.content.length} currently showing movies`);
-    
-    if(response.data.content.length > 0){
-      ApiResponseValidator.validateEntityFields(response, 'movie');
-    }
   });
 
   it("should return currently showing movies with 'Action' genre when GET /api/movies/currently-showing is called", async () => {
