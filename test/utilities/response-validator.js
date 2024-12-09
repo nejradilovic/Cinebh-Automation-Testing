@@ -10,9 +10,9 @@ class ApiResponseValidator {
     expect(Array.isArray(responseData)).toBe(true);
   }
 
-  async validateArrayResponse(response) {
+  validateArrayResponse(response) {
     const data = response.data.content || response.data;
-    await this.isArray(data); 
+    this.isArray(data); 
   }
 
   validateFields(response, expectedFields) {
@@ -21,41 +21,20 @@ class ApiResponseValidator {
     });
   }
 
-  validateMovieFields(response) {
-    const movieFields = fieldDefinitions.movieFields;
-
+  validateEntityFields(response, entityType) {
+    const fields = fieldDefinitions[`${entityType}Fields`];
     if (Array.isArray(response.data.content)) {
-      response.data.content.forEach(movie => {
-        this.validateFields({ data: movie }, movieFields);
+      response.data.content.forEach(entity => {
+        this.validateFields({ data: entity }, fields);
       });
     } else {
-      this.validateFields(response, movieFields);
+      this.validateFields(response, fields);
     }
-  }
-
-  validateVenueFields(response) {
-    const venueFields = fieldDefinitions.venueFields;
-
-    if (Array.isArray(response.data.content)) {
-      response.data.content.forEach(venue => {
-        this.validateFields({ data: venue }, venueFields);
-      });
-    } else {
-      this.validateFields(response, venueFields);
-    }
-  }
-
-  validateGenreFields(response) {
-    this.validateFields(response, fieldDefinitions.genreFields);
-  }
-
-  validateProjectionFields(response) {
-    this.validateFields(response, fieldDefinitions.projectionFields);
   }
 
   validatePaginatedResponse(response, page = 0, size = 4) {
-    expect(response.data.pageable.pageNumber).toBeGreaterThanOrEqual(page);
-    expect(response.data.pageable.pageSize).toBeGreaterThanOrEqual(size);
+    expect(response.data.pageable.pageNumber).toBe(page);
+    expect(response.data.pageable.pageSize).toBeLessThanOrEqual(size);
     expect(response.data.totalElements).toBeGreaterThanOrEqual(0);
   }
 }

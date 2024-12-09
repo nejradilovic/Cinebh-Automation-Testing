@@ -7,7 +7,7 @@ describe("API Tests for Venues", () => {
 
     ApiResponseValidator.validateStatus(response, 200);
     ApiResponseValidator.validateArrayResponse(response);
-    ApiResponseValidator.validateVenueFields(response);
+    ApiResponseValidator.validateEntityFields(response, 'venue');
   });
 
   it("should return a paginated list of venues when GET /api/venues/ is called", async () => {
@@ -17,7 +17,7 @@ describe("API Tests for Venues", () => {
     ApiResponseValidator.validateArrayResponse(response);
     
     if (response.data.content.length > 0) {
-      ApiResponseValidator.validateVenueFields(response);
+      ApiResponseValidator.validateEntityFields(response, 'venue');
     }
     ApiResponseValidator.validatePaginatedResponse(response);
   });

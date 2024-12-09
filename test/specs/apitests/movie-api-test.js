@@ -1,7 +1,6 @@
 const MoviesEndpoint = require("../../api/movies-endpoint");
 const ApiResponseValidator = require("../../utilities/response-validator");
 const testData = require("../../data/test-data");
-const fieldDefinitions = require("../../data/field-definitions");
 
 describe("API Tests for Movies", () => {
   it("should return a paginated list of movies when GET /api/movies/ is called", async () => {
@@ -11,7 +10,7 @@ describe("API Tests for Movies", () => {
     ApiResponseValidator.validateArrayResponse(response);
     
     if (response.data.content.length > 0) {
-      ApiResponseValidator.validateMovieFields(response);
+      ApiResponseValidator.validateEntityFields(response, 'movie');
     }
     ApiResponseValidator.validatePaginatedResponse(response);
   });
@@ -36,7 +35,7 @@ describe("API Tests for Movies", () => {
     console.log(`GET /api/movies/${movieId}/similar: Received ${response.data.content.length} similar movies`);
 
     if (response.data.content.length > 0) {
-      ApiResponseValidator.validateMovieFields(response);
+      ApiResponseValidator.validateEntityFields(response, 'movie');
     }
   });
 
@@ -49,7 +48,7 @@ describe("API Tests for Movies", () => {
     console.log(`GET /api/movies/featured: Received ${response.data.length} featured movies`);
     
     if(response.data.length > 0) {
-      ApiResponseValidator.validateMovieFields(response)
+      ApiResponseValidator.validateEntityFields(response, 'movie');
     }
   });
 
@@ -62,7 +61,7 @@ describe("API Tests for Movies", () => {
       console.log(`GET /api/movies/upcoming: Received ${response.data.content.length} upcoming movies`);
   
       if (response.data.content.length > 0) {
-        ApiResponseValidator.validateMovieFields(response);
+        ApiResponseValidator.validateEntityFields(response, 'movie');
       }
     }
     else {
@@ -80,7 +79,7 @@ describe("API Tests for Movies", () => {
     console.log(`GET /api/movies/currently-showing: Received ${response.data.content.length} currently showing movies`);
     
     if(response.data.content.length > 0){
-      ApiResponseValidator.validateMovieFields(response);
+      ApiResponseValidator.validateEntityFields(response, 'movie');
     }
   });
 
@@ -99,7 +98,7 @@ describe("API Tests for Movies", () => {
     }
   
     response.data.content.forEach(movie => {
-      ApiResponseValidator.validateFields({ data: movie }, fieldDefinitions.movieFields);
+      ApiResponseValidator.validateEntityFields({ data: movie }, 'movie');
   
       const movieGenres = movie.genres;
       ApiResponseValidator.isArray(movieGenres);

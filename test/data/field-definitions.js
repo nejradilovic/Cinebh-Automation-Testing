@@ -28,8 +28,8 @@ const fieldDefinitions = {
     "imageURL",
     "projections",
   ],
-  genreFields: ["id", "name", "movies"],
-  projectionFields: ["id", "projection", "time"],
+  genreFields: ["id", "name"],
+  projectionFields: ["id", "time"],
 };
 
 module.exports = fieldDefinitions;

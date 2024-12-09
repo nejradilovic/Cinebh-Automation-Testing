@@ -7,6 +7,6 @@ describe("API Tests for Genres", () => {
 
     ApiResponseValidator.validateStatus(response, 200);
     ApiResponseValidator.validateArrayResponse(response);
-    ApiResponseValidator.validateGenreFields(response);
+    ApiResponseValidator.validateEntityFields(response, 'genre');
   });
 });

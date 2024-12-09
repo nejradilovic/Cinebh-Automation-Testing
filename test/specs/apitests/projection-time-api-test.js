@@ -7,6 +7,6 @@ describe("API Tests for Projection Times", () => {
 
     ApiResponseValidator.validateStatus(response, 200);
     ApiResponseValidator.validateArrayResponse(response);
-    ApiResponseValidator.validateProjectionFields(response);
+    ApiResponseValidator.validateEntityFields(response, 'projection');
   });
 });
