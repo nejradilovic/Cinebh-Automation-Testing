@@ -5,7 +5,7 @@ describe("API Tests for Genres", () => {
   it("should return a list of genres when GET /api/genres/ is called", async () => {
     const response = await GenresEndpoint.getAllGenres();
 
-    ApiResponseValidator.validateStatus(response, 200);
+    ApiResponseValidator.validateStatus(response);
     ApiResponseValidator.validateArrayResponse(response);
     ApiResponseValidator.validateEntityFields(response, 'genre');
   });

@@ -21,7 +21,7 @@ class ApiResponseValidator {
 
   validateFields(response, expectedFields) {
     expectedFields.forEach((field) => {
-      expect(response.data).toBeDefined(field);
+      expect(response.data[field]).toBeDefined();
     });
   }
 
@@ -33,8 +33,6 @@ class ApiResponseValidator {
       content.forEach((entity) => {
         this.validateFields({ data: entity }, fields);
       });
-    } else if (content.length === 0) {
-      expect(content).toEqual([]);
     } else {
       this.validateFields(response, fields);
     }

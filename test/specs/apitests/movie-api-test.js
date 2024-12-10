@@ -6,7 +6,7 @@ describe("API Tests for Movies", () => {
   it("should return a paginated list of movies when GET /api/movies/ is called", async () => {
     const response = await MoviesEndpoint.getPaginatedMovies();
 
-    ApiResponseValidator.validateStatus(response, 200);
+    ApiResponseValidator.validateStatus(response);
     ApiResponseValidator.validateArrayResponse(response);
     ApiResponseValidator.validateEntityFields(response, 'movie');
     ApiResponseValidator.validatePaginatedResponse(response);
@@ -15,8 +15,8 @@ describe("API Tests for Movies", () => {
   it("should return movie details when GET /api/movies/{movieId} is called", async () => {
     const response = await MoviesEndpoint.getMovieById(testData.movie.id);
 
-    ApiResponseValidator.validateStatus(response, 200);
-    ApiResponseValidator.validateEquality(response.data,testData.movie);
+    ApiResponseValidator.validateStatus(response);
+    ApiResponseValidator.validateEquality(response.data, testData.movie);
 
     console.log(`GET /api/movies/${testData.movie.id}: Received movie details of ${response.data.title}`);
   });
@@ -24,7 +24,7 @@ describe("API Tests for Movies", () => {
   it("should return similar movies when GET /api/movies/{movieId}/similar is called", async () => {
     const response = await MoviesEndpoint.getSimilarMovies(testData.movie.id);
 
-    ApiResponseValidator.validateStatus(response, 200);
+    ApiResponseValidator.validateStatus(response);
     ApiResponseValidator.validateArrayResponse(response);
     ApiResponseValidator.validateEntityFields(response, 'movie');
 
@@ -34,7 +34,7 @@ describe("API Tests for Movies", () => {
   it("should return featured movies when GET /api/movies/featured is called", async () => {
     const response = await MoviesEndpoint.getFeaturedMovies();
 
-    ApiResponseValidator.validateStatus(response, 200);
+    ApiResponseValidator.validateStatus(response);
     ApiResponseValidator.validateArrayResponse(response);
     ApiResponseValidator.validateEntityFields(response, 'movie');
     
@@ -44,25 +44,19 @@ describe("API Tests for Movies", () => {
   it("should return upcoming movies when GET /api/movies/upcoming is called", async () => {
     const response = await MoviesEndpoint.getUpcomingMovies();
   
-    ApiResponseValidator.validateStatus(response, 200);
-  
-    if (response.data.content.length > 0) {
-      console.log(`GET /api/movies/upcoming: Received ${response.data.content.length} upcoming movies`);
-      ApiResponseValidator.validateEntityFields(response, 'movie');
-    }
-    else {
-      console.log("GET /api/movies/upcoming: No upcoming movies found");
-      expect(response.data.content).toEqual([]);
-    }
+    ApiResponseValidator.validateStatus(response);
+    ApiResponseValidator.validateArrayResponse(response);
+    ApiResponseValidator.validateEntityFields(response, 'movie');
+
+    console.log(`GET /api/movies/upcoming: Received ${response.data.content.length} upcoming movies`);
   });
   
   it("should return currently showing movies when GET /api/movies/currently-showing is called", async () => {
     const response = await MoviesEndpoint.getCurrentlyShowingMovies();
      
-    ApiResponseValidator.validateStatus(response, 200);
+    ApiResponseValidator.validateStatus(response);
     ApiResponseValidator.validateArrayResponse(response);
     ApiResponseValidator.validateEntityFields(response, 'movie');
-
     console.log(`GET /api/movies/currently-showing: Received ${response.data.content.length} currently showing movies`);
   });
 
@@ -70,7 +64,7 @@ describe("API Tests for Movies", () => {
     const filters = { genres: 'Action'}; 
     const response = await MoviesEndpoint.getCurrentlyShowingMovies(0, 4, filters);
   
-    ApiResponseValidator.validateStatus(response, 200);
+    ApiResponseValidator.validateStatus(response);
     ApiResponseValidator.validateArrayResponse(response);
     ApiResponseValidator.validatePaginatedResponse(response);
 
