@@ -15,6 +15,11 @@ class ApiResponseValidator {
     this.isArray(data);
   }
 
+  validateResponse(response, statusCode = 200) {
+    this.validateStatus(response, statusCode);
+    this.validateArrayResponse(response);
+  }
+
   validateEquality(actual, expected) {
     expect(actual).toEqual(expected);
   }
