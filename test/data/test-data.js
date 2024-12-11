@@ -85,7 +85,7 @@ module.exports = {
     { name: 'All Cities', option: 'Tuzla' },
     { name: 'All Venues', option: 'Cinestar' },
     { name: 'All Genres', option: 'Action' },
-    { name: 'All Projection Times', option: '18:00:00' },
+    { name: 'All Projection Times', option: '18:00' },
   ],
   date: getDateSevenDaysFromNow(),
 };

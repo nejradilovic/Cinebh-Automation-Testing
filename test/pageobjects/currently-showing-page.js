@@ -12,6 +12,7 @@ class CurrentlyShowingPage extends Page {
   get loadMoreLink() {
     return new BaseElement(selectors.currentlyShowingPage.loadMoreLink);
   }
+  
   get disabledLoadMoreLink() {
     return new BaseElement(selectors.currentlyShowingPage.disabledLoadMoreLink);
   }
