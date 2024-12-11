@@ -1,3 +1,13 @@
+const getDateSevenDaysFromNow = () => {
+  const currentDate = new Date();
+  currentDate.setDate(currentDate.getDate() + 7); 
+  
+  const month = currentDate.toLocaleString('en-US', { month: 'short' });
+  const day = currentDate.getDate();
+
+  return `${month} ${day}`;
+};
+
 module.exports = {
   movie: {
     id: "9eb27e1f-8591-4bce-bdc8-9bcc2cac445f",
@@ -70,4 +80,12 @@ module.exports = {
       },
     ],
   },
+
+  filters: [
+    { name: 'All Cities', option: 'Tuzla' },
+    { name: 'All Venues', option: 'Cinestar' },
+    { name: 'All Genres', option: 'Action' },
+    { name: 'All Projection Times', option: '18:00:00' },
+  ],
+  date: getDateSevenDaysFromNow(),
 };
