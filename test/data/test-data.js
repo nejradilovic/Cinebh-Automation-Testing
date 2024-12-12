@@ -87,5 +87,6 @@ module.exports = {
     { name: 'All Genres', option: 'Action' },
     { name: 'All Projection Times', option: '18:00' },
   ],
+  
   date: getDateSevenDaysFromNow(),
 };

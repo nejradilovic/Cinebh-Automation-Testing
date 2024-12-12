@@ -13,10 +13,6 @@ class CurrentlyShowingPage extends Page {
     return new BaseElement(selectors.currentlyShowingPage.loadMoreLink);
   }
   
-  get disabledLoadMoreLink() {
-    return new BaseElement(selectors.currentlyShowingPage.disabledLoadMoreLink);
-  }
-
   get movieList() {
     return new BaseElement(selectors.currentlyShowingPage.movieList);
   }
@@ -43,8 +39,9 @@ class CurrentlyShowingPage extends Page {
 
   async loadAllMovies() {
     while (true) {
-      if(await this.disabledLoadMoreLink.isExisting()) break;
-      await this.loadMoreLink.click();
+      const loadMoreButton = await this.loadMoreLink.getElement();
+      if (!await loadMoreButton.isExisting()) break;
+      await loadMoreButton.click();
     }
   }
 
