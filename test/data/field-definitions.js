@@ -1,0 +1,35 @@
+const fieldDefinitions = {
+  movieFields: [
+    "id",
+    "title",
+    "rating",
+    "language",
+    "length",
+    "description",
+    "director",
+    "startDate",
+    "endDate",
+    "trailerUrl",
+    "writers",
+    "genres",
+    "performers",
+    "images",
+    "ratings",
+    "projections",
+  ],
+  venueFields: [
+    "id",
+    "name",
+    "phone",
+    "street",
+    "streetNumber",
+    "city",
+    "postcode",
+    "imageURL",
+    "projections",
+  ],
+  genreFields: ["id", "name"],
+  projectionFields: ["id", "time"],
+};
+
+module.exports = fieldDefinitions;
