@@ -1,9 +1,9 @@
 const CurrentlyShowingPage = require("../pageobjects/currently-showing-page");
 const MovieDetailsPage = require("../pageobjects/movie-details-page");
-const CommonUtility = require("../utilities/common-utility");
+const CommonUtility = require("./common-utility");
 const testData = require("../data/test-data");
 
-class CurrentlyShowingUtility {
+class CurrentlyShowingUtility extends CommonUtility {
   async loadAllAndVerifyMovies() {
     await CurrentlyShowingPage.loadAllMovies();
     await CurrentlyShowingPage.verifyMoviesCount();
@@ -14,7 +14,7 @@ class CurrentlyShowingUtility {
     await this.verifySearchResults(searchTerm);
     await CurrentlyShowingPage.openMovieDetails(movieIndex);
     await MovieDetailsPage.titleText.waitForDisplayed();
-    await CommonUtility.checkUrlContains(testData.movie.id);
+    await this.checkUrlContains(testData.movie.id);
   }
 
   async verifySearchResults(searchTerm) {
