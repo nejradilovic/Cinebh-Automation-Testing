@@ -1,17 +1,22 @@
-const HomePage = require('../pageobjects/home-page');
-const CommonUtility = require('../utilities/common-utility'); 
-const CurrentlyShowingUtility = require('../utilities/currently-showing-utility');
-const CurrentlyShowingPage = require('../pageobjects/currently-showing-page');
+const {HomePage, CurrentlyShowingPage} = require("../pageobjects/pageobjects");
+const {CurrentlyShowingUtility, LoginUtility} = require("../utilities/utilities");
 const testData = require("../data/test-data");
+
+const {email, password} = testData.existingUser;
 
 describe('Cinebh Smoke Test', () => {
     beforeAll(async () => {
         await HomePage.open(); 
     });
 
+    it('should login successfully', async () => {
+        await LoginUtility.login({email, password});
+        await LoginUtility.verifySuccessfulLogin(email);
+    });
+
     it('should navigate to Currently Showing page', async () => {
         await HomePage.clickCurrentlyShowing();
-        await CommonUtility.checkUrlContains('/currently-showing');
+        await CurrentlyShowingUtility.checkUrlContains('/currently-showing');
     });
     
     it('should display all movies on the Currently Showing page', async () => {

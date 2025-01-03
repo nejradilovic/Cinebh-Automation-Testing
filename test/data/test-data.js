@@ -89,4 +89,10 @@ module.exports = {
   ],
   
   date: getDateSevenDaysFromNow(),
+
+  existingUser: {
+    email: "[valid_email]",
+    password: "[valid_password]"
+  },
+
 };
