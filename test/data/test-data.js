@@ -95,4 +95,8 @@ module.exports = {
     password: "[valid_password]"
   },
 
+  newUser: {
+    email: `testuser${Date.now()}@example.com`,
+    password: "TestPass123!"
+  },
 };

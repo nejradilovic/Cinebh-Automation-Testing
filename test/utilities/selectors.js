@@ -3,6 +3,7 @@ module.exports = {
         currentlyShowingLink: '//a[@href="/currently-showing"]',
         seeAllCurrentlyShowingLink: '//a[contains(@class, "_see_all_2gndr_22") and @href="/currently-showing"]',
         usernameDropdown: '//button[contains(@class, "_container_xick5_6")]//div[@class="_content_xick5_25"]/div',
+        signOutButton: '//button[contains(@class, "_dropdown_item_xick5_52") and text()="Logout"]',
     },
 
     currentlyShowingPage: {
@@ -20,9 +21,16 @@ module.exports = {
     },
 
     loginPage: {
-        signInButton: '//button[contains(@class, "_button_224q1_1 _navbar_224q1_25") and text()="Sign In"]', // Dugme za otvaranje forme
-        emailInput: '//input[@placeholder="Email Address" and @name="email"]', // Polje za unos emaila
-        passwordInput: '//input[@placeholder="Password" and @name="password"]', // Polje za unos lozinke
-        submitButton: '//button[contains(@class, "_button_224q1_1 _solid_224q1_13") and text()="Sign In"]', // Dugme za potvrdu prijave
+        signInButton: '//button[contains(@class, "_button_224q1_1 _navbar_224q1_25") and text()="Sign In"]', 
+        emailInput: '//input[@placeholder="Email Address" and @name="email"]', 
+        passwordInput: '//input[@placeholder="Password" and @name="password"]',
+        submitButton: '//button[contains(@class, "_button_224q1_1 _solid_224q1_13") and text()="Sign In"]', 
+        signUpLink: '//a[@class="_link_qr9cs_165" and text()="Sign Up"]',
+    },
+
+    registrationPage: {
+        confirmPasswordInput: '//input[@placeholder="Confirm Password" and @name="repeatPassword"]',
+        signUpButton: '//button[contains(@class, "_button_224q1_1 _solid_224q1_13") and text()="Sign Up"]',
+        backButton: '//div[@class="_back_button_qr9cs_32"]',
     },
 };
