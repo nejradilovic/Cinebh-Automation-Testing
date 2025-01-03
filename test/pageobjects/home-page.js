@@ -5,10 +5,14 @@ const BaseElement = require('../utilities/elements/base-element');
 class HomePage extends Page {
     open() {
         return super.open(""); 
-    }
+    }       
 
     get currentlyShowingLink() {
         return new BaseElement(selectors.homePage.currentlyShowingLink);
+    }
+
+    get usernameDropdown() {
+        return new BaseElement(selectors.homePage.usernameDropdown);
     }
 
     get seeAllCurrentlyShowingLink() {
