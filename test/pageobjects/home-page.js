@@ -1,6 +1,7 @@
 const Page = require('./page');
 const selectors = require('../utilities/selectors'); 
 const BaseElement = require('../utilities/elements/base-element'); 
+const Button = require('../utilities/elements/button');
 
 class HomePage extends Page {
     open() {
@@ -15,6 +16,10 @@ class HomePage extends Page {
         return new BaseElement(selectors.homePage.usernameDropdown);
     }
 
+    get signOutButton() {
+        return new Button(selectors.homePage.signOutButton);
+    }
+
     get seeAllCurrentlyShowingLink() {
         return new BaseElement(selectors.homePage.seeAllCurrentlyShowingLink); 
     }
@@ -25,6 +30,11 @@ class HomePage extends Page {
 
     async clickSeeAllCurrentlyShowing() {
         await this.seeAllCurrentlyShowingLink.click(); 
+    }
+
+    async signOut() {
+        await this.usernameDropdown.click();
+        await this.signOutButton.click();
     }
 }
 
