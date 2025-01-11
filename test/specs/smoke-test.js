@@ -25,7 +25,7 @@ describe('Cinebh Smoke Test', () => {
 
     it('should navigate to Currently Showing page', async () => {
         await HomePage.clickCurrentlyShowing();
-        await CurrentlyShowingUtility.checkUrlContains('/currently-showing');
+        await CurrentlyShowingPage.verifyUrlContains('/currently-showing');
     });
 
     it('should display all movies on the Currently Showing page', async () => {
