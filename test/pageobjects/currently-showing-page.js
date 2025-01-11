@@ -67,6 +67,14 @@ class CurrentlyShowingPage extends Page {
     expect(movies.length).toBe(expectedCount);
   }
 
+  async verifySearchResults(searchTerm) {
+    const movieList = await this.movieList.getElements(); 
+    for (const movie of movieList) {
+      const title = await movie.getText(); 
+      expect(title.toLowerCase()).toContain(searchTerm.toLowerCase());
+    }
+  }
+
   async applyFilters(filters) {
     for (const filter of filters) {
       await this.getFilter(filter.name).click();
@@ -78,6 +86,11 @@ class CurrentlyShowingPage extends Page {
     const dateBlock = this.getDate(date);
     if (await dateBlock.isExisting()) await dateBlock.click();
     else throw new Error(`Date "${date}" not found in the date picker.`);
+  }
+
+  async verifyUrlContains(expectedSubstring) {
+    const currentUrl = await browser.getUrl();
+    expect(currentUrl).toContain(expectedSubstring);
   }
 }
 

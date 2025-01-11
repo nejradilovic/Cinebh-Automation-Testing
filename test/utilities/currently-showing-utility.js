@@ -11,18 +11,10 @@ class CurrentlyShowingUtility extends CommonUtility {
 
   async searchAndOpenMovie(searchTerm, movieIndex = 0) {
     await CurrentlyShowingPage.searchForMovie(searchTerm);
-    await this.verifySearchResults(searchTerm);
+    await CurrentlyShowingPage.verifySearchResults(searchTerm);
     await CurrentlyShowingPage.openMovieDetails(movieIndex);
     await MovieDetailsPage.titleText.waitForDisplayed();
-    await this.checkUrlContains(testData.movie.id);
-  }
-
-  async verifySearchResults(searchTerm) {
-    const movieList = await CurrentlyShowingPage.movieList.getElements(); 
-    for (const movie of movieList) {
-      const title = await movie.getText(); 
-      expect(title.toLowerCase()).toContain(searchTerm.toLowerCase())
-    }
+    await MovieDetailsPage.verifyUrlContains(testData.movie.id);
   }
 }
 
